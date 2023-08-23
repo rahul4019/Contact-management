@@ -9,7 +9,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/add-contact" element={<Contact />} />
         <Route path="/charts-and-maps" element={<ChartAndMaps />} />
       </Routes>
     </Layout>
