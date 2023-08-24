@@ -1,11 +1,10 @@
-import React from 'react';
 import Sidebar from './Sidebar';
 
 const Layout = ({ children }: any) => {
   return (
-    <div className="max-width bg-gray-100 min-h-screen flex">
+    <div className="max-width min-h-screen flex">
       <Sidebar />
-      {children}
+      <div className="w-full max-h-screen overflow-y-scroll hide-scrollbar"> {children}</div>
     </div>
   );
 };
