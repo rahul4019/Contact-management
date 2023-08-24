@@ -10,6 +10,7 @@ const Sidebar = () => {
 
   return (
     <>
+      {/* Desktop View */}
       <div className="hidden md:flex flex-col lg:pl-4 py-10 pl-2 bg-white min-h-screen md:w-1/5 ">
         <h2 className="font-semibold text-xl py-4">Contact App</h2>
         <Link
@@ -78,11 +79,10 @@ const Sidebar = () => {
           </Link>
         </ul>
       </div>
-      <div className="md:hidden w-full absolute top-0 py-4 px-8 bg-green-200">
-        <div
-          className="cursor-pointer"
-          onClick={() => setsetshowSidebar((prev) => !prev)}
-        >
+      {/* MOBILE VIEW */}
+      <div className="md:hidden w-full absolute top-0 py-4 px-8 bg-gray-100 shadow-lg">
+        {/* Hamburger icon */}
+        <div onClick={() => setsetshowSidebar((prev) => !prev)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -99,7 +99,7 @@ const Sidebar = () => {
           </svg>
         </div>
         <div
-          className={`absolute top-0 left-0 w-3/5 h-screen ${
+          className={`absolute top-0 left-0 w-3/5 h-screen shadow-xl ${
             !setshowSidebar ? 'hidden' : ''
           }`}
         >
@@ -123,7 +123,7 @@ const Sidebar = () => {
                 />
               </svg>
             </div>
-            <h2 className="font-semibold text-xl py-4">Contact App</h2>
+            <h2 className="font-semibold text-xl py-10">Contact App</h2>
             <Link
               to="/"
               className={`text-xl flex gap-2 text-gray-400 ${

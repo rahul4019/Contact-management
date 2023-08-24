@@ -10,7 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.max-width{
+.max-width {
   @apply max-w-[1440px] mx-auto;
 }
 
