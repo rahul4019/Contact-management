@@ -1,30 +1,57 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../features/contactSlice';
+
+import { Contact } from '../../types';
 
 const ContactForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [status, setStatus] = useState('active');
+  const uniqueId = uuidv4();
+  const dispath = useDispatch();
 
-  const handleFirstNameChange = (event: any) => {
-    setFirstName(event.target.value);
+  const [contactData, setContactData] = useState<Contact>({
+    firstname: '',
+    lastname: '',
+    status: 'inactive',
+    id: uniqueId,
+  });
+  const [isContactValid, setIsContactValid] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setContactData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // check if all the input fields have been filled or not
+    const validContactData = Object.values({
+      ...contactData,
+      [name]: value,
+    }).some((value) => value.trim() === '');
+
+    setIsContactValid(!validContactData);
   };
 
-  const handleLastNameChange = (event: any) => {
-    setLastName(event.target.value);
-  };
+  const handleForm = (e: any) => {
+    e.preventDefault();
+    if (isContactValid) {
+      dispath(addContact(contactData));
 
-  const handleStatusChange = (event: any) => {
-    setStatus(event.target.value);
-  };
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    // Perform form submission logic here
-    console.log('Form submitted:', { firstName, lastName, status });
+      // update the form input value
+      const newUUID = uuidv4();
+      setContactData({
+        firstname: '',
+        lastname: '',
+        status: 'inactive',
+        id: newUUID,
+      });
+    }
   };
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <form className="w-full max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <div className="mb-4">
           <label className="block font-semibold mb-2" htmlFor="firstName">
@@ -34,8 +61,10 @@ const ContactForm = () => {
             type="text"
             id="firstName"
             className="w-full p-2 border rounded-md"
-            value={firstName}
-            onChange={handleFirstNameChange}
+            name="firstname"
+            value={contactData.firstname}
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -45,9 +74,11 @@ const ContactForm = () => {
           <input
             type="text"
             id="lastName"
+            name="lastname"
             className="w-full p-2 border rounded-md"
-            value={lastName}
-            onChange={handleLastNameChange}
+            value={contactData.lastname}
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -57,27 +88,33 @@ const ContactForm = () => {
               <input
                 type="radio"
                 value="active"
-                checked={status === 'active'}
-                onChange={handleStatusChange}
-              />{' '}
+                name="status"
+                checked={contactData.status === 'active'}
+                onChange={handleChange}
+              />
               Active
             </label>
             <label>
               <input
                 type="radio"
                 value="inactive"
-                checked={status === 'inactive'}
-                onChange={handleStatusChange}
-              />{' '}
+                name="status"
+                checked={contactData.status === 'inactive'}
+                onChange={handleChange}
+              />
               Inactive
             </label>
           </div>
         </div>
+
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
-          onClick={handleSubmit}
+          type="button"
+          className={`rounded-md bg-blue-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
+            !isContactValid ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+          onClick={handleForm}
         >
-          Submit
+          Create Contact
         </button>
       </form>
     </div>
