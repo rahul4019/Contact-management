@@ -11,7 +11,7 @@ interface ContactCardProps {
 
 const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
   const dispatch = useDispatch();
-  const {firstname, lastname, status } = contactDetails;
+  const {id,firstname, lastname, status } = contactDetails;
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
@@ -20,7 +20,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
       <p className="text-gray-500 capitalize">{status}</p>
       <div className="mt-10 flex flex-col gap-5">
         <Link
-          to="/edit-contact"
+          to={`/edit-contact/${id}`}
           className="inline-flex px-4 py-3 bg-green-600 hover:bg-green-500  justify-center text-white items-center rounded-md"
         >
           <button type="button" className="flex font-semibold">

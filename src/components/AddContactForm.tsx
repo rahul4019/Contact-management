@@ -5,7 +5,7 @@ import { addContact } from '../features/contactSlice';
 
 import { Contact } from '../../types';
 
-const ContactForm = () => {
+const AddContactForm = () => {
   const uniqueId = uuidv4();
   const dispath = useDispatch();
 
@@ -121,4 +121,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default AddContactForm;
