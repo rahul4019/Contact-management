@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom';
-import { Contact } from '../../types';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { Contact } from '../../types';
+import { deleteContact } from '../features/contactSlice';
 
 interface ContactCardProps {
   contactDetails: Contact;
 }
 
 const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
-  const { id, firstname, lastname, status } = contactDetails;
-  
+  const dispatch = useDispatch();
+  const {firstname, lastname, status } = contactDetails;
+
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-xl font-semibold">{firstname}</h2>
@@ -40,6 +44,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
         <button
           type="button"
           className="inline-flex justify-center items-center rounded-md bg-red-600 px-4 py-3 text-sm font-semibold text-white hover:bg-red-500"
+          onClick={() => dispatch(deleteContact(contactDetails))}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
