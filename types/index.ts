@@ -8,3 +8,13 @@ export interface Contact {
 export interface ContactState {
   Contacts: Contact[];
 }
+
+export interface DateData {
+  [date: string]: number;
+}
+
+export interface LineChartData {
+  cases: DateData;
+  deaths: DateData;
+  recovered: DateData;
+}
