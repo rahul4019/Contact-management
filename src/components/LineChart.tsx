@@ -94,8 +94,8 @@ const LineChart: React.FC<LineChartProps> = ({ covidData }) => {
   };
 
   return (
-    <>
-      <h1 className="text-2xl font-semibold">Covid cases flactuations</h1>
+    <div className="w-full flex flex-col gap-5 items-center relative shadow-xl">
+      <h1 className="text-2xl font-bold">Covid cases flactuations</h1>
       <div className="p-4 w-full flex justify-center">
         <Line
           data={data}
@@ -103,7 +103,7 @@ const LineChart: React.FC<LineChartProps> = ({ covidData }) => {
           className="w-full h-[500px] md:h-[600px]"
         />
       </div>
-    </>
+    </div>
   );
 };
 

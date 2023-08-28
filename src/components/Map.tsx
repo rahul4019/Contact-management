@@ -17,31 +17,41 @@ interface MapProps {
 const Map: React.FC<MapProps> = ({ mapData }) => {
   const position: [number, number] = [0, 0];
   return (
-    <MapContainer center={position} zoom={2} className="h-[800px] w-full">
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-      {mapData.map((item) => (
-        <Marker
-          position={[item.countryInfo.lat, item.countryInfo.long]}
-          icon={customIcon}
+    <div className="w-full flex flex-col gap-0 items-center relative shadow-xl">
+      <h1 className="font-bold text-2xl">Country-wise map</h1>
+      <div className='px-4 py-10 w-full'>
+        <MapContainer
+          center={position}
+          zoom={2}
+          className="h-[300px] md:h-[500px] w-full "
         >
-          <Popup>
-            <p className="font-bold capitalize text-xl">{item.country}</p>
-            <ul>
-              <li className="text-blue-400 font-semibold">
-                Active: {item.active}
-              </li>
-              <li className="text-red-400 font-semibold">
-                Deaths: {item.deaths}
-              </li>
-              <li className="text-green-500 font-semibold">
-                Recovered: {item.recovered}
-              </li>
-            </ul>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+          {mapData.map((item) => (
+            <Marker
+              position={[item.countryInfo.lat, item.countryInfo.long]}
+              icon={customIcon}
+              key={item.countryInfo._id}
+            >
+              <Popup>
+                <p className="font-bold capitalize text-xl">{item.country}</p>
+                <ul>
+                  <li className="text-blue-400 font-semibold">
+                    Active: {item.active}
+                  </li>
+                  <li className="text-red-400 font-semibold">
+                    Deaths: {item.deaths}
+                  </li>
+                  <li className="text-green-500 font-semibold">
+                    Recovered: {item.recovered}
+                  </li>
+                </ul>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </div>
+    </div>
   );
 };
 
