@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import LineChart from '../components/LineChart';
 import Map from '../components/Map';
+import DashboardCard from '../components/DashboardCard';
 
 const ChartsAndMaps = () => {
   const getChartData = async () => {
@@ -14,6 +15,11 @@ const ChartsAndMaps = () => {
 
   const getMapData = async () => {
     const data = await fetch('https://disease.sh/v3/covid-19/countries');
+    return await data.json();
+  };
+
+  const getWorldwideData = async () => {
+    const data = await fetch('https://disease.sh/v3/covid-19/all');
     return await data.json();
   };
 
@@ -29,7 +35,15 @@ const ChartsAndMaps = () => {
     queryFn: getMapData,
   });
 
-  if (isMapDataFetching || isLineChartDataFetching) {
+  const { data: worldWideData, isFetching: isWorldWideDataFetching } = useQuery(
+    {
+      queryKey: ['worlWideData'],
+      queryFn: getWorldwideData,
+    }
+  );
+
+  // if data has been not loaded display a loader
+  if (isMapDataFetching || isLineChartDataFetching || isWorldWideDataFetching) {
     return (
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <svg
@@ -55,6 +69,18 @@ const ChartsAndMaps = () => {
 
   return (
     <div className="my-20 px-4 md:px-10 flex border-box flex-1 flex-col w-full items-center relative gap-20 ">
+      {worldWideData && (
+        <div className="w-full flex flex-col gap-4 items-center shadow-lg py-5 rounded-lg ">
+          <h1 className="font-semibold text-2xl">Worldwide cases</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-4 p-4 ">
+            <DashboardCard title="total cases" numbers={worldWideData.cases} />
+            <DashboardCard title="active" numbers={worldWideData.active} />
+            <DashboardCard title="deaths" numbers={worldWideData.deaths} />
+            <DashboardCard title="recovered" numbers={worldWideData.recovered} />
+          </div>
+        </div>
+      )}
+
       {LineChartData && <LineChart covidData={LineChartData} />}
       {mapData && <Map mapData={mapData} />}
     </div>

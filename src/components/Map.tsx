@@ -17,8 +17,8 @@ interface MapProps {
 const Map: React.FC<MapProps> = ({ mapData }) => {
   const position: [number, number] = [0, 0];
   return (
-    <div className="w-full flex flex-col gap-0 items-center relative shadow-xl">
-      <h1 className="font-bold text-2xl">Country-wise map</h1>
+    <div className="w-full flex flex-col gap-0 items-center relative shadow-xl rounded-lg">
+      <h1 className="font-semibold text-2xl">Country-wise map</h1>
       <div className='px-4 py-10 w-full'>
         <MapContainer
           center={position}
