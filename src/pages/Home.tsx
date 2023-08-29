@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Contact } from '../../types';
 
 import ContactCard from '../components/ContactCard';
+import { Contact } from '../../types';
 import { RootState } from '../store';
 
 const Home = () => {
@@ -33,6 +33,7 @@ const Home = () => {
         </button>
       </Link>
 
+      {/* if there are contacts loop through them to display Contact card */}
       {contacts.length > 0 ? (
         <div className="grid w-full p-4 gap-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           {contacts.map((contact: Contact) => (

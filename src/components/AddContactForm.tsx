@@ -47,6 +47,8 @@ const AddContactForm = () => {
         status: 'inactive',
         id: newUUID,
       });
+
+      window.alert('Contact added successfully!');
     }
   };
 

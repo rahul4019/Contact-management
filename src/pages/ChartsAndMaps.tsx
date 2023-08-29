@@ -1,11 +1,11 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+ import { useQuery } from '@tanstack/react-query';
 
 import LineChart from '../components/LineChart';
 import Map from '../components/Map';
 import DashboardCard from '../components/DashboardCard';
 
 const ChartsAndMaps = () => {
+
   const getChartData = async () => {
     const data = await fetch(
       'https://disease.sh/v3/covid-19/historical/all?lastdays=all'
@@ -69,6 +69,7 @@ const ChartsAndMaps = () => {
 
   return (
     <div className="my-20 px-4 md:px-10 flex border-box flex-1 flex-col w-full items-center relative gap-20 ">
+      {/* render worldWide data if the data has been fetched */}
       {worldWideData && (
         <div className="w-full flex flex-col gap-4 items-center shadow-lg py-5 rounded-lg ">
           <h1 className="font-semibold text-2xl">Worldwide cases</h1>
@@ -76,12 +77,17 @@ const ChartsAndMaps = () => {
             <DashboardCard title="total cases" numbers={worldWideData.cases} />
             <DashboardCard title="active" numbers={worldWideData.active} />
             <DashboardCard title="deaths" numbers={worldWideData.deaths} />
-            <DashboardCard title="recovered" numbers={worldWideData.recovered} />
+            <DashboardCard
+              title="recovered"
+              numbers={worldWideData.recovered}
+            />
           </div>
         </div>
       )}
 
+      {/*render  Line chart component if LineChartData has been fetched*/}
       {LineChartData && <LineChart covidData={LineChartData} />}
+      {/*render  Map chart component if mapData has been fetched*/}
       {mapData && <Map mapData={mapData} />}
     </div>
   );
