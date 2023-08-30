@@ -116,7 +116,7 @@ const Sidebar = () => {
             <h2 className="py-5 text-xl font-semibold">Contact Management</h2>
 
             <ul className="flex flex-col gap-5 py-10 font-semibold text-gray-400">
-              <Link to="/">
+              <Link to="/" onClick={() => setsetshowSidebar(false)}>
                 <li
                   className={`flex gap-2 ${
                     pathname === "/" ? activeClass : ""
@@ -134,7 +134,7 @@ const Sidebar = () => {
                   Home
                 </li>
               </Link>
-              <Link to="/add-contact">
+              <Link to="/add-contact" onClick={() => setsetshowSidebar(false)}>
                 <li
                   className={`flex gap-2 ${
                     pathname === "/add-contact" ? activeClass : ""
@@ -157,7 +157,10 @@ const Sidebar = () => {
                   Add Contact
                 </li>
               </Link>
-              <Link to="/charts-and-maps">
+              <Link
+                to="/charts-and-maps"
+                onClick={() => setsetshowSidebar(false)}
+              >
                 <li
                   className={`flex gap-2 ${
                     pathname === "/charts-and-maps" ? activeClass : ""
