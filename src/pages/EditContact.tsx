@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import EditContactForm from '../components/EditContactForm';
+import { useParams } from "react-router-dom";
+import EditContactForm from "../components/EditContactForm";
 
 const EditContact = () => {
   const { id } = useParams();

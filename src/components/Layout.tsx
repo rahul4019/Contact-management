@@ -1,10 +1,12 @@
-import Sidebar from './Sidebar';
+import Sidebar from "./Sidebar";
 
 const Layout = ({ children }: any) => {
   return (
-    <div className="max-width min-h-screen flex">
+    <div className="max-width flex min-h-screen">
       <Sidebar />
-      <div className="w-full max-h-screen overflow-y-scroll hide-scrollbar relative"> {children}</div>
+      <div className="hide-scrollbar relative max-h-screen w-full overflow-y-scroll">
+        {children}
+      </div>
     </div>
   );
 };

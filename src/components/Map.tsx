@@ -1,12 +1,12 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { icon } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { MapData } from '../../types';
+import React from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { icon } from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { MapData } from "../../types";
 
 // Create a custom icon
 const customIcon = icon({
-  iconUrl: 'https://cdn-icons-png.flaticon.com/512/2776/2776067.png',
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/2776/2776067.png",
   iconSize: [32, 32],
 });
 
@@ -17,13 +17,13 @@ interface MapProps {
 const Map: React.FC<MapProps> = ({ mapData }) => {
   const position: [number, number] = [0, 0];
   return (
-    <div className="w-full flex flex-col gap-0 items-center relative shadow-xl rounded-lg">
-      <h1 className="font-semibold text-2xl">Country-wise map</h1>
-      <div className='px-4 py-10 w-full'>
+    <div className="relative flex w-full flex-col items-center gap-0 rounded-lg shadow-xl">
+      <h1 className="text-2xl font-semibold">Country-wise map</h1>
+      <div className="w-full px-4 py-10">
         <MapContainer
           center={position}
           zoom={2}
-          className="h-[300px] md:h-[500px] w-full "
+          className="h-[300px] w-full md:h-[500px] "
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -34,15 +34,15 @@ const Map: React.FC<MapProps> = ({ mapData }) => {
               key={item.countryInfo._id}
             >
               <Popup>
-                <p className="font-bold capitalize text-xl">{item.country}</p>
+                <p className="text-xl font-bold capitalize">{item.country}</p>
                 <ul>
-                  <li className="text-blue-400 font-semibold">
+                  <li className="font-semibold text-blue-400">
                     Active: {item.active}
                   </li>
-                  <li className="text-red-400 font-semibold">
+                  <li className="font-semibold text-red-400">
                     Deaths: {item.deaths}
                   </li>
-                  <li className="text-green-500 font-semibold">
+                  <li className="font-semibold text-green-500">
                     Recovered: {item.recovered}
                   </li>
                 </ul>

@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import ContactCard from '../components/ContactCard';
-import { Contact } from '../../types';
-import { RootState } from '../store';
+import ContactCard from "../components/ContactCard";
+import { Contact } from "../../types";
+import { RootState } from "../store";
 
 const Home = () => {
   const contacts = useSelector((state: RootState) => state.contact.Contacts);
   return (
-    <div className="mt-20 py-4 flex border-box flex-1 flex-col w-full items-center gap-20">
+    <div className="border-box mt-20 flex w-full flex-1 flex-col items-center gap-20 py-4">
       {/* Create contact button */}
       <Link to="/add-contact">
         <button
@@ -21,7 +21,7 @@ const Home = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-6 h-6 mr-2"
+            className="mr-2 h-6 w-6"
           >
             <path
               strokeLinecap="round"
@@ -35,7 +35,7 @@ const Home = () => {
 
       {/* if there are contacts loop through them to display Contact card */}
       {contacts.length > 0 ? (
-        <div className="grid w-full p-4 gap-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid w-full grid-cols-1 gap-10 p-4 md:grid-cols-2 xl:grid-cols-3">
           {contacts.map((contact: Contact) => (
             <ContactCard key={contact.id} contactDetails={contact} />
           ))}

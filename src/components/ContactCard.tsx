@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import { Contact } from '../../types';
-import { deleteContact } from '../features/contactSlice';
+import { Contact } from "../../types";
+import { deleteContact } from "../features/contactSlice";
 
 interface ContactCardProps {
   contactDetails: Contact;
@@ -14,18 +14,18 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
   const { id, firstname, lastname, status } = contactDetails;
 
   return (
-    <div className="bg-white rounded-md border">
+    <div className="rounded-md border bg-white">
       <div className="p-4">
         <h1 className="inline-flex items-center text-2xl font-semibold capitalize">
           {firstname} {lastname}
         </h1>
-        <div className="flex gap-2 text-xl text-gray-600 items-center my-4">
-          {status === 'active' ? (
+        <div className="my-4 flex items-center gap-2 text-xl text-gray-600">
+          {status === "active" ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="#19c17c"
-              className="w-6 h-6"
+              className="h-6 w-6"
             >
               <path
                 fillRule="evenodd"
@@ -38,7 +38,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="#FF6666"
-              className="w-6 h-6"
+              className="h-6 w-6"
             >
               <path
                 fillRule="evenodd"
@@ -54,7 +54,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
         <div className="mt-10 flex flex-col gap-5">
           <Link
             to={`/edit-contact/${id}`}
-            className="inline-flex  py-2 bg-green-600 hover:bg-green-500  justify-center text-white items-center rounded-md"
+            className="inline-flex  items-center justify-center rounded-md  bg-green-600 py-2 text-white hover:bg-green-500"
           >
             <button type="button" className="flex font-semibold">
               <svg
@@ -63,7 +63,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 mr-2"
+                className="mr-2 h-5 w-5"
               >
                 <path
                   strokeLinecap="round"
@@ -76,7 +76,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
           </Link>
           <button
             type="button"
-            className="inline-flex justify-center items-center rounded-md bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-500"
+            className="inline-flex items-center justify-center rounded-md bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-500"
             onClick={() => dispatch(deleteContact(contactDetails))}
           >
             <svg
@@ -85,7 +85,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactDetails }) => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="w-5 h-5 mr-2"
+              className="mr-2 h-5 w-5"
             >
               <path
                 strokeLinecap="round"

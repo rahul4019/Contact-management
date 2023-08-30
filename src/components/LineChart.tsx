@@ -1,5 +1,5 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
+import React from "react";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJs,
   LineElement,
@@ -10,8 +10,8 @@ import {
   Tooltip,
   ChartData,
   ChartOptions,
-} from 'chart.js';
-import { LineChartData } from '../../types';
+} from "chart.js";
+import { LineChartData } from "../../types";
 
 ChartJs.register(
   LineElement,
@@ -19,7 +19,7 @@ ChartJs.register(
   LinearScale,
   PointElement,
   Legend,
-  Tooltip
+  Tooltip,
 );
 
 interface LineChartProps {
@@ -30,40 +30,40 @@ const LineChart: React.FC<LineChartProps> = ({ covidData }) => {
   const dates: string[] = Object.keys(covidData.cases).map((key) => key);
   const cases: number[] = Object.values(covidData.cases).map((value) => value);
   const deaths: number[] = Object.values(covidData.deaths).map(
-    (value) => value
+    (value) => value,
   );
   const recovered: number[] = Object.values(covidData.recovered).map(
-    (value) => value
+    (value) => value,
   );
 
-  const data: ChartData<'line'> = {
+  const data: ChartData<"line"> = {
     labels: dates,
     datasets: [
       {
-        label: 'Deaths',
+        label: "Deaths",
         data: deaths,
-        backgroundColor: '#FF5C5C',
-        borderColor: '#FF5C5C',
-        pointBorderColor: '#FF5C5C',
+        backgroundColor: "#FF5C5C",
+        borderColor: "#FF5C5C",
+        pointBorderColor: "#FF5C5C",
       },
       {
-        label: 'Cases',
+        label: "Cases",
         data: cases,
-        backgroundColor: '#5C5CFF',
-        borderColor: '#5C5CFF',
-        pointBorderColor: '#5C5CFF',
+        backgroundColor: "#5C5CFF",
+        borderColor: "#5C5CFF",
+        pointBorderColor: "#5C5CFF",
       },
       {
-        label: 'Recovered',
+        label: "Recovered",
         data: recovered,
-        backgroundColor: '#8AFF8A',
-        borderColor: '#8AFF8A',
-        pointBorderColor: '#8AFF8A',
+        backgroundColor: "#8AFF8A",
+        borderColor: "#8AFF8A",
+        pointBorderColor: "#8AFF8A",
       },
     ],
   };
 
-  const options: ChartOptions<'line'> = {
+  const options: ChartOptions<"line"> = {
     plugins: {
       legend: {
         display: true,
@@ -74,7 +74,7 @@ const LineChart: React.FC<LineChartProps> = ({ covidData }) => {
         beginAtZero: true,
         title: {
           display: true,
-          text: 'Date',
+          text: "Date",
         },
         ticks: {
           maxTicksLimit: dates.length,
@@ -85,7 +85,7 @@ const LineChart: React.FC<LineChartProps> = ({ covidData }) => {
         min: 0,
         title: {
           display: true,
-          text: 'Number of cases',
+          text: "Number of cases",
         },
       },
     },
@@ -94,13 +94,13 @@ const LineChart: React.FC<LineChartProps> = ({ covidData }) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-5 items-center relative shadow-xl rounded-lg">
+    <div className="relative flex w-full flex-col items-center gap-5 rounded-lg shadow-xl">
       <h1 className="text-2xl font-semibold">Covid cases flactuations</h1>
-      <div className="p-4 w-full flex justify-center">
+      <div className="flex w-full justify-center p-4">
         <Line
           data={data}
           options={options}
-          className="w-full h-[500px] md:h-[600px]"
+          className="h-[500px] w-full md:h-[600px]"
         />
       </div>
     </div>

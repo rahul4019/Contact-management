@@ -1,54 +1,53 @@
- import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import LineChart from '../components/LineChart';
-import Map from '../components/Map';
-import DashboardCard from '../components/DashboardCard';
+import LineChart from "../components/LineChart";
+import Map from "../components/Map";
+import DashboardCard from "../components/DashboardCard";
 
 const ChartsAndMaps = () => {
-
   const getChartData = async () => {
     const data = await fetch(
-      'https://disease.sh/v3/covid-19/historical/all?lastdays=all'
+      "https://disease.sh/v3/covid-19/historical/all?lastdays=all",
     );
     return await data.json();
   };
 
   const getMapData = async () => {
-    const data = await fetch('https://disease.sh/v3/covid-19/countries');
+    const data = await fetch("https://disease.sh/v3/covid-19/countries");
     return await data.json();
   };
 
   const getWorldwideData = async () => {
-    const data = await fetch('https://disease.sh/v3/covid-19/all');
+    const data = await fetch("https://disease.sh/v3/covid-19/all");
     return await data.json();
   };
 
   const { data: LineChartData, isFetching: isLineChartDataFetching } = useQuery(
     {
-      queryKey: ['chartData'],
+      queryKey: ["chartData"],
       queryFn: getChartData,
-    }
+    },
   );
 
   const { data: mapData, isFetching: isMapDataFetching } = useQuery({
-    queryKey: ['mapData'],
+    queryKey: ["mapData"],
     queryFn: getMapData,
   });
 
   const { data: worldWideData, isFetching: isWorldWideDataFetching } = useQuery(
     {
-      queryKey: ['worlWideData'],
+      queryKey: ["worlWideData"],
       queryFn: getWorldwideData,
-    }
+    },
   );
 
   // if data has been not loaded display a loader
   if (isMapDataFetching || isLineChartDataFetching || isWorldWideDataFetching) {
     return (
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
         <svg
           aria-hidden="true"
-          className="w-16 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
+          className="mr-2 h-16 w-16 animate-spin fill-gray-600 text-gray-200 dark:text-gray-600"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -68,12 +67,12 @@ const ChartsAndMaps = () => {
   }
 
   return (
-    <div className="my-20 px-4 md:px-10 flex border-box flex-1 flex-col w-full items-center relative gap-20 ">
+    <div className="border-box relative my-20 flex w-full flex-1 flex-col items-center gap-20 px-4 md:px-10 ">
       {/* render worldWide data if the data has been fetched */}
       {worldWideData && (
-        <div className="w-full flex flex-col gap-4 items-center shadow-lg py-5 rounded-lg ">
-          <h1 className="font-semibold text-2xl">Worldwide cases</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-4 p-4 ">
+        <div className="flex w-full flex-col items-center gap-4 rounded-lg py-5 shadow-lg ">
+          <h1 className="text-2xl font-semibold">Worldwide cases</h1>
+          <div className="grid w-full grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:grid-cols-4 ">
             <DashboardCard title="total cases" numbers={worldWideData.cases} />
             <DashboardCard title="active" numbers={worldWideData.active} />
             <DashboardCard title="deaths" numbers={worldWideData.deaths} />
